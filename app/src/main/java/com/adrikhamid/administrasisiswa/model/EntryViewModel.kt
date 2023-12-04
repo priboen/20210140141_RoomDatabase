@@ -1,5 +1,7 @@
 package com.adrikhamid.administrasisiswa.model
 
+import com.adrikhamid.administrasisiswa.data.Siswa
+
 
 data class UIStateSiswa(
     val detailSiswa: DetailSiswa = DetailSiswa(),
@@ -13,4 +15,10 @@ data class DetailSiswa(
     val telpon: String = ""
 )
 
+fun Siswa.toDetailSiswa(): DetailSiswa = DetailSiswa(
+    id=id,
+    nama=nama,
+    alamat=alamat,
+    telpon=telpon
+)
 
