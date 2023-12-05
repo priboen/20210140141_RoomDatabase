@@ -17,6 +17,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.adrikhamid.administrasisiswa.R
 import com.adrikhamid.administrasisiswa.model.DetailSiswa
 
+
+@Composable
+fun EntrySiswaBody(){
+    Column {
+
+    }
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInputSiswa(
