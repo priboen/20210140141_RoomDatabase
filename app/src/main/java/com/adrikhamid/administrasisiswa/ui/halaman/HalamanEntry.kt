@@ -3,6 +3,7 @@ package com.adrikhamid.administrasisiswa.ui.halaman
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -52,5 +53,11 @@ fun FormInputSiswa(
             enabled = enabled,
             singleLine = true
         )
+        if (enabled) {
+            Text(
+                text = stringResource(id = R.string.required_field),
+                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+            )
+        }
     }
 }
