@@ -8,18 +8,25 @@ import com.adrikhamid.administrasisiswa.data.Siswa
 import com.adrikhamid.administrasisiswa.repositori.RepositoriSiswa
 
 
-class EntryViewModel (private val repositoriSiswa: RepositoriSiswa): ViewModel(){
+class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
-    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa):Boolean{
-        return with(uiState){
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
+        return with(uiState) {
             nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
     }
 
-    fun updateUiState(detailSiswa: DetailSiswa){
-        uiStateSiswa= UIStateSiswa(detailSiswa=detailSiswa, isEntryValid = validasiInput(detailSiswa))
+    fun updateUiState(detailSiswa: DetailSiswa) {
+        uiStateSiswa =
+            UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
+    }
+
+    suspend fun saveSiswa() {
+        if (validasiInput()) {
+            repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
+        }
     }
 }
 
@@ -35,6 +42,12 @@ data class DetailSiswa(
     val telpon: String = ""
 )
 
+fun DetailSiswa.toSiswa(): Siswa = Siswa(
+    id = id,
+    nama = nama,
+    alamat = alamat,
+    telpon = telpon
+)
 fun Siswa.toUiStateSiswa(isEntryValid: Boolean = false): UIStateSiswa = UIStateSiswa(
     detailSiswa = this.toDetailSiswa(),
     isEntryValid = isEntryValid
